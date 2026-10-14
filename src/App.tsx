@@ -53,7 +53,7 @@ export default function App() {
       />
       <div className="scrim" onClick={() => setDrawerOpen(false)} aria-hidden="true" />
       <div className="workspace">
-        <Topbar title={page.label} onMenu={() => setDrawerOpen(true)} onSignOut={() => setSignedOut(true)} />
+        <Topbar title={page.label} onMenu={() => setDrawerOpen(true)} />
         <main className="content">
           {page.slug === 'overview' ? (
             <>

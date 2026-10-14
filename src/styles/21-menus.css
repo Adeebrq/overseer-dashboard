@@ -1,4 +1,4 @@
-/* Top-bar and table menus: notifications (bell), row actions, regions, avatar, toast action */
+/* Top-bar and table menus: notifications (bell), row actions, regions, avatar link, toast action */
 
 /* ---------- Notifications (bell) ---------- */
 .notifications {
@@ -271,22 +271,15 @@
   color: var(--text-dim);
 }
 
-/* ---------- Top-bar avatar (opens the account menu) ---------- */
+/* ---------- Top-bar avatar (links to Profile) ---------- */
 .topbar__avatar-btn {
   display: grid;
   border-radius: 50%;
   transition: box-shadow 0.15s ease;
 }
 .topbar__avatar-btn:hover,
-.account--avatar.is-open .topbar__avatar-btn {
+.topbar__avatar-btn:focus-visible {
   box-shadow: 0 0 0 2px rgba(74, 222, 128, 0.45);
-}
-.account--avatar .popover.account__menu {
-  top: calc(100% + 8px);
-  bottom: auto;
-  right: 0;
-  left: auto;
-  transform-origin: top right;
 }
 
 /* ---------- Logo → Overview ---------- */

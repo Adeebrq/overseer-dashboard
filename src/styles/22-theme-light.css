@@ -498,7 +498,7 @@
   background: var(--row-hover);
 }
 [data-theme='light'] .topbar__avatar-btn:hover,
-[data-theme='light'] .account--avatar.is-open .topbar__avatar-btn {
+[data-theme='light'] .topbar__avatar-btn:focus-visible {
   box-shadow: 0 0 0 2px rgba(0, 164, 73, 0.4);
 }
 [data-theme='light'] .toast__action {
