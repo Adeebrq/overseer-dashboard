@@ -447,3 +447,41 @@
 [data-theme='light'] .filter__swatch--degraded {
   background: #fbefd3;
 }
+
+/* Notifications */
+[data-theme='light'] .notifications.is-open .topbar__bell {
+  color: #00803a;
+}
+[data-theme='light'] .topbar__bell-dot,
+[data-theme='light'] .notifications__unread {
+  background: var(--green);
+}
+[data-theme='light'] .notifications__item.is-active {
+  background: var(--row-hover);
+}
+[data-theme='light'] .notifications__item-title {
+  color: var(--text-secondary);
+}
+[data-theme='light'] .notifications__item.is-unread .notifications__item-title {
+  color: var(--text);
+}
+[data-theme='light'] .notif-marker {
+  --marker: var(--green);
+  --marker-edge: rgba(0, 164, 73, 0.45);
+}
+[data-theme='light'] .notif-marker--paused {
+  --marker: #b83a3a;
+  --marker-edge: rgba(184, 58, 58, 0.4);
+}
+[data-theme='light'] .notif-marker--deploying {
+  --marker: #2f5fc4;
+  --marker-edge: rgba(47, 95, 196, 0.4);
+}
+[data-theme='light'] .notif-marker--degraded {
+  --marker: #9a6a12;
+  --marker-edge: rgba(154, 106, 18, 0.4);
+}
+[data-theme='light'] .notif-marker--info {
+  --marker: #6f7872;
+  --marker-edge: rgba(111, 120, 114, 0.4);
+}

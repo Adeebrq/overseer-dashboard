@@ -1,4 +1,4 @@
-import { Bell } from '../../components/icons'
+import NotificationsMenu from './NotificationsMenu'
 import TopSearch from './TopSearch'
 
 type Props = { title: string; onMenu: () => void }
@@ -16,9 +16,7 @@ export default function Topbar({ title, onMenu }: Props) {
 
       <div className="topbar__actions">
         <TopSearch />
-        <button className="icon-btn topbar__bell" aria-label="Notifications">
-          <Bell />
-        </button>
+        <NotificationsMenu />
         <span className="topbar__divider" aria-hidden="true" />
         <img className="topbar__avatar" src="/avatars/user.jpg" alt="Your profile" />
       </div>

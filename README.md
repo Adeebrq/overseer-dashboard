@@ -48,7 +48,7 @@ next to the feature that uses it, and has unit tests alongside (`*.test.ts`).
 
 ## Theming
 
-Dark is the base theme. Light mode is a single override block (`styles/21-theme-light.css`) using values taken
+Dark is the base theme. Light mode is a single override block (`styles/22-theme-light.css`) using values taken
 from `design/light.svg`; the switch is in the account menu (`lib/theme.ts`). The choice is saved in
 `localStorage` and otherwise follows the system setting; `index.html` applies it before first paint.
 

@@ -1,0 +1,150 @@
+/* Notifications (bell) */
+.notifications {
+  position: relative;
+}
+.topbar__bell {
+  position: relative;
+}
+/* Unread badge: a small pixel square, cut out of the top bar */
+.topbar__bell-dot {
+  position: absolute;
+  top: -1.5px;
+  right: -2.5px;
+  width: 5px;
+  height: 5px;
+  border-radius: 1px;
+  background: var(--green-bright);
+  box-shadow: 0 0 0 1.5px var(--frame);
+}
+.notifications.is-open .topbar__bell {
+  opacity: 1;
+  color: var(--green-bright);
+}
+
+.notifications__panel {
+  width: 320px;
+  padding: 10px 6px 6px;
+  white-space: normal;
+}
+.notifications__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 2px 6px 9px 8px;
+}
+.notifications__title {
+  color: var(--text);
+}
+.notifications__tabs {
+  margin: 0 2px 6px;
+  grid-template-columns: repeat(2, 1fr);
+}
+.notifications__list {
+  max-height: min(360px, 60vh);
+  overflow-y: auto;
+  list-style: none;
+  outline: none;
+  scrollbar-width: thin;
+  scrollbar-color: #3a403c transparent;
+}
+.notifications__item {
+  display: grid;
+  grid-template-columns: 12px minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 10px;
+  padding: 9px 8px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  user-select: none;
+}
+.notifications__item + .notifications__item {
+  margin-top: 1px;
+}
+.notifications__item.is-active {
+  background: #2f3631;
+}
+.notifications__list:focus-visible .notifications__item.is-active {
+  box-shadow: inset 0 0 0 1px rgba(74, 222, 128, 0.35);
+}
+.notifications__text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+.notifications__item-title {
+  font-size: 11px;
+  letter-spacing: -0.02em;
+  color: var(--text-muted);
+}
+.notifications__item.is-unread .notifications__item-title {
+  color: var(--text);
+}
+.notifications__detail {
+  font-size: 9.6px;
+  line-height: 1.35;
+  color: var(--text-dim);
+}
+.notifications__meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+  padding-top: 1px;
+}
+.notifications__time {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--text-dim);
+}
+.notifications__unread {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green-bright);
+}
+.notifications__empty {
+  padding: 26px 8px 22px;
+  text-align: center;
+  font-size: 10.6px;
+  color: var(--text-muted);
+}
+
+/* Square-in-square marker, the same shape as the map markers, coloured by status */
+.notif-marker {
+  position: relative;
+  width: 11px;
+  height: 11px;
+  margin-top: 1px;
+  border: 1px solid var(--marker-edge, rgba(74, 222, 128, 0.5));
+}
+.notif-marker::after {
+  content: '';
+  position: absolute;
+  inset: 2.2px;
+  background: var(--marker, var(--green-bright));
+}
+.notif-marker--paused {
+  --marker: var(--red);
+  --marker-edge: rgba(240, 138, 138, 0.5);
+}
+.notif-marker--deploying {
+  --marker: var(--blue);
+  --marker-edge: rgba(127, 168, 255, 0.5);
+}
+.notif-marker--degraded {
+  --marker: var(--amber);
+  --marker-edge: rgba(224, 179, 106, 0.5);
+}
+.notif-marker--info {
+  --marker: var(--text-muted);
+  --marker-edge: rgba(166, 166, 171, 0.45);
+}
+
+@media (max-width: 640px) {
+  .notifications__panel {
+    width: min(320px, calc(100vw - 24px));
+    right: -46px;
+  }
+}
