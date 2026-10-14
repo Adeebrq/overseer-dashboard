@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
-import { agents, avatarFor, type Agent } from '../../data/mock'
+import { avatarFor, type Agent } from '../../data/mock'
+import { useAgents } from '../../data/agentsStore'
 import { useTheme } from '../../lib/theme'
 import AgentFilter from './AgentFilter'
 import { activeFilterCount, matchesFilters, NO_FILTERS, type Filters } from './filters'
@@ -7,7 +8,8 @@ import { STATUS_LABEL } from '../../data/status'
 import { formatMs, formatUsd } from '../../lib/format'
 import DotBar from '../../components/DotBar'
 import ExportMenu from './ExportMenu'
-import { More, Search, SortChevron } from '../../components/icons'
+import { Search, SortChevron } from '../../components/icons'
+import RowActions from './RowActions'
 import { FOCUS_AGENT_EVENT, takePendingAgent } from '../../lib/agentFocus'
 
 type SortKey = 'name' | 'status' | 'success' | 'cost' | 'p95'
@@ -32,6 +34,7 @@ const columns: { label: string; sort?: SortKey }[] = [
 
 export default function AgentHealth() {
   const theme = useTheme()
+  const agents = useAgents()
   const [query, setQuery] = useState('')
   const [sort, setSort] = useState<{ key: SortKey; dir: 1 | -1 } | null>(null)
   const [filters, setFilters] = useState<Filters>(NO_FILTERS)
@@ -72,7 +75,7 @@ export default function AgentHealth() {
     if (!sort) return list
     const get = sortValue[sort.key]
     return [...list].sort((a, b) => (get(a) > get(b) ? 1 : get(a) < get(b) ? -1 : 0) * sort.dir)
-  }, [query, sort, filters])
+  }, [agents, query, sort, filters])
 
   const toggleSort = (key: SortKey) =>
     setSort((s) => (s?.key === key ? (s.dir === 1 ? { key, dir: -1 } : null) : { key, dir: 1 }))
@@ -162,9 +165,7 @@ export default function AgentHealth() {
                 <td>{formatUsd(a.costPer1k)}</td>
                 <td>{formatMs(a.p95Ms)}</td>
                 <td className="health__actions">
-                  <button className="icon-btn" aria-label={`Actions for ${a.name}`}>
-                    <More />
-                  </button>
+                  <RowActions agent={a} />
                 </td>
               </tr>
             ))}

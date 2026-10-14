@@ -10,7 +10,9 @@ export default function Sidebar({ activeSlug, onCollapse, onNavigate, onSignOut 
   return (
     <aside className="sidebar" aria-label="Primary">
       <div className="sidebar__brand">
-        <Logo className="sidebar__logo" />
+        <a href="#/overview" className="sidebar__home" aria-label="Overseer — go to Overview" onClick={onNavigate}>
+          <Logo className="sidebar__logo" />
+        </a>
         <button className="icon-btn sidebar__collapse" onClick={onCollapse} aria-label="Collapse sidebar">
           <Collapse />
         </button>

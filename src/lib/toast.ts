@@ -5,6 +5,8 @@ export type Toast = {
   title: string
   description?: string
   tone: 'success' | 'error'
+  /** Optional button, e.g. Undo. Runs, then dismisses the toast. */
+  action?: { label: string; run: () => void }
   /** Set while the exit animation plays. */
   leaving?: boolean
 }

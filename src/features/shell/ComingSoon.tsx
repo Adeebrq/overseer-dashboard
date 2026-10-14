@@ -1,8 +1,8 @@
-import type { NavItem } from '../../lib/router'
+import type { Page } from '../../lib/router'
 import DotBar from '../../components/DotBar'
 
 /** Placeholder for sections that aren't built yet. Remounted per page, so its intro replays. */
-export default function ComingSoon({ page }: { page: NavItem }) {
+export default function ComingSoon({ page }: { page: Page }) {
   const Icon = page.icon
   return (
     <section className="card coming-soon" aria-labelledby="coming-soon-title">
@@ -15,7 +15,8 @@ export default function ComingSoon({ page }: { page: NavItem }) {
           Coming soon
         </h2>
         <p className="coming-soon__text">
-          The {page.label} section is still being built. It’ll appear here as soon as it’s ready.
+          {page.description ??
+            `The ${page.label} section is still being built. It’ll appear here as soon as it’s ready.`}
         </p>
         <DotBar value={42} rows={3} label="In progress" />
         <a className="btn coming-soon__back" href="#/overview">

@@ -10,11 +10,13 @@ type Props = {
   cols?: number
   tone?: 'green' | 'amber'
   label: string
+  /** Play the pixel load intro (default). Off for bars inside menus, which should read instantly. */
+  intro?: boolean
 }
 
 /** Pixel progress bar drawn on a canvas, with the shared load intro. */
-export default function DotBar({ value, rows, cols = 44, tone = 'green', label }: Props) {
-  const intro = useIntro(true)
+export default function DotBar({ value, rows, cols = 44, tone = 'green', label, intro: playIntro = true }: Props) {
+  const intro = useIntro(true) && playIntro
   const { on, off } = useMemo(() => dotBarCells(value, rows, cols, intro), [value, rows, cols, intro])
 
   const w = (cols - 1) * PITCH + DOT

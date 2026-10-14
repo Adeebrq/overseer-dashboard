@@ -51,7 +51,7 @@ button.user-card:hover .user-card__more,
   font-size: 8.6px;
   color: var(--text-muted);
 }
-.account__item {
+.menu-item {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -64,15 +64,15 @@ button.user-card:hover .user-card__more,
   cursor: pointer;
   user-select: none;
 }
-.account__item.is-active {
+.menu-item.is-active {
   background: #2f3631;
   color: var(--text-bright);
 }
-.account__item.has-rule {
+.menu-item.has-rule {
   position: relative;
   margin-top: 9px;
 }
-.account__item.has-rule::before {
+.menu-item.has-rule::before {
   content: '';
   position: absolute;
   left: -4px;
@@ -81,10 +81,10 @@ button.user-card:hover .user-card__more,
   height: 1px;
   background: var(--card-line);
 }
-.account__item.is-danger {
+.menu-item.is-danger {
   color: var(--red);
 }
-.account__item.is-danger.is-active {
+.menu-item.is-danger.is-active {
   background: rgba(240, 138, 138, 0.1);
   color: #ffb1b1;
 }

@@ -328,23 +328,23 @@
 [data-theme='light'] .filter__option:has(:focus-visible),
 [data-theme='light'] .top-search__item.is-active,
 [data-theme='light'] .export__item.is-active,
-[data-theme='light'] .account__item.is-active {
+[data-theme='light'] .menu-item.is-active {
   background: var(--row-hover);
   color: var(--text);
 }
 [data-theme='light'] .dropdown__option,
 [data-theme='light'] .filter__option,
-[data-theme='light'] .account__item {
+[data-theme='light'] .menu-item {
   color: var(--text-secondary);
 }
 [data-theme='light'] .dropdown__check,
 [data-theme='light'] .top-search mark {
   color: #00803a;
 }
-[data-theme='light'] .account__item.is-danger {
+[data-theme='light'] .menu-item.is-danger {
   color: #b83a3a;
 }
-[data-theme='light'] .account__item.is-danger.is-active {
+[data-theme='light'] .menu-item.is-danger.is-active {
   background: #fbe4e4;
   color: #9e2c2c;
 }
@@ -484,4 +484,28 @@
 [data-theme='light'] .notif-marker--info {
   --marker: #6f7872;
   --marker-edge: rgba(111, 120, 114, 0.4);
+}
+
+/* Row actions, regions, avatar, toast action */
+[data-theme='light'] .row-actions.is-open .icon-btn {
+  background: rgba(23, 27, 24, 0.06);
+}
+[data-theme='light'] .regions.is-open .btn {
+  border-color: var(--green);
+  filter: none;
+}
+[data-theme='light'] .regions__item.is-active {
+  background: var(--row-hover);
+}
+[data-theme='light'] .topbar__avatar-btn:hover,
+[data-theme='light'] .account--avatar.is-open .topbar__avatar-btn {
+  box-shadow: 0 0 0 2px rgba(0, 164, 73, 0.4);
+}
+[data-theme='light'] .toast__action {
+  border-color: #a6dfbf;
+  background: #fff;
+  color: #2a302c;
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.08),
+    inset 0 -2px 6px #ddebe2;
 }

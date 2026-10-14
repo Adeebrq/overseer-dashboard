@@ -32,6 +32,18 @@ export default function Toaster() {
             <span className="toast__title">{t.title}</span>
             {t.description && <span className="toast__desc">{t.description}</span>}
           </span>
+          {t.action && (
+            <button
+              type="button"
+              className="toast__action"
+              onClick={() => {
+                t.action?.run()
+                dismiss(t.id)
+              }}
+            >
+              {t.action.label}
+            </button>
+          )}
           <button className="icon-btn toast__close" aria-label="Dismiss notification" onClick={() => dismiss(t.id)}>
             <svg viewBox="0 0 10 10" aria-hidden="true">
               <path d="M3 3l4 4M7 3 3 7" fill="none" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" />

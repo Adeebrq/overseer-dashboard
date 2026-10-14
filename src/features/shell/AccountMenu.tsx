@@ -13,10 +13,15 @@ const SHORTCUTS: [string, string[]][] = [
   ['Close a menu or dialog', ['esc']],
 ]
 
-type Props = { onSignOut: () => void; onNavigate: () => void }
+type Props = {
+  onSignOut: () => void
+  onNavigate?: () => void
+  /** 'card': the sidebar account card (menu opens above it). 'avatar': the top-bar photo (menu opens below). */
+  trigger?: 'card' | 'avatar'
+}
 
-/** The account card at the bottom of the sidebar, its menu, and the dialogs it opens. */
-export default function AccountMenu({ onSignOut, onNavigate }: Props) {
+/** The account menu, the dialogs it opens, and its trigger (sidebar card or top-bar photo). */
+export default function AccountMenu({ onSignOut, onNavigate, trigger = 'card' }: Props) {
   const { open, setOpen, close, root, button, panel } = usePopover<HTMLUListElement>()
   const shortcuts = useRef<HTMLDialogElement>(null)
   const confirm = useRef<HTMLDialogElement>(null)
@@ -53,7 +58,7 @@ export default function AccountMenu({ onSignOut, onNavigate }: Props) {
 
   function go(hash: string) {
     location.hash = hash
-    onNavigate()
+    onNavigate?.()
   }
 
   const pick = (i: number) => {
@@ -73,11 +78,11 @@ export default function AccountMenu({ onSignOut, onNavigate }: Props) {
   }, [open, panel, setActive])
 
   return (
-    <div className={`account${open ? ' is-open' : ''}`} ref={root}>
+    <div className={`account account--${trigger}${open ? ' is-open' : ''}`} ref={root}>
       <button
         ref={button}
         type="button"
-        className="user-card hatch-card hatch-card--left"
+        className={trigger === 'card' ? 'user-card hatch-card hatch-card--left' : 'topbar__avatar-btn'}
         aria-haspopup="menu"
         aria-expanded={open}
         aria-controls={`${id}-menu`}
@@ -85,14 +90,20 @@ export default function AccountMenu({ onSignOut, onNavigate }: Props) {
         onClick={() => setOpen((o) => !o)}
         onKeyDown={openOnArrow(() => setOpen(true))}
       >
-        <span className="user-card__initials">AQ</span>
-        <span className="user-card__who">
-          <span className="user-card__name">@adeebrq</span>
-          <span className="user-card__role">Owner</span>
-        </span>
-        <span className="user-card__more" aria-hidden="true">
-          <Kebab />
-        </span>
+        {trigger === 'card' ? (
+          <>
+            <span className="user-card__initials">AQ</span>
+            <span className="user-card__who">
+              <span className="user-card__name">@adeebrq</span>
+              <span className="user-card__role">Owner</span>
+            </span>
+            <span className="user-card__more" aria-hidden="true">
+              <Kebab />
+            </span>
+          </>
+        ) : (
+          <img className="topbar__avatar" src="/avatars/user.jpg" alt="" />
+        )}
       </button>
 
       {open && (
@@ -119,7 +130,7 @@ export default function AccountMenu({ onSignOut, onNavigate }: Props) {
               id={`${id}-item-${i}`}
               role={it.checked === undefined ? 'menuitem' : 'menuitemcheckbox'}
               aria-checked={it.checked}
-              className={`account__item${i === active ? ' is-active' : ''}${it.danger ? ' is-danger' : ''}${
+              className={`menu-item${i === active ? ' is-active' : ''}${it.danger ? ' is-danger' : ''}${
                 it.danger ? ' has-rule' : ''
               }`}
               onPointerEnter={() => setActive(i)}

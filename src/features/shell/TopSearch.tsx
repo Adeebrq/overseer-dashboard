@@ -1,5 +1,6 @@
 import { useEffect, useId, useMemo, useRef, useState, type ReactNode } from 'react'
-import { agents, avatarFor, type Agent } from '../../data/mock'
+import { avatarFor, type Agent } from '../../data/mock'
+import { useAgents } from '../../data/agentsStore'
 import { useTheme } from '../../lib/theme'
 import { STATUS_LABEL } from '../../data/status'
 import { focusAgent } from '../../lib/agentFocus'
@@ -25,6 +26,7 @@ function highlight(text: string, q: string): ReactNode {
 /** Top-bar quick search: agents and pages, combobox pattern with full keyboard support. */
 export default function TopSearch() {
   const theme = useTheme()
+  const agents = useAgents()
   const [query, setQuery] = useState('')
   const [open, setOpen] = useState(false)
   const [active, setActive] = useState(0)
@@ -46,7 +48,7 @@ export default function TopSearch() {
       { title: 'Agents', items: agentHits },
       { title: ql ? 'Pages' : 'Jump to', items: pageHits },
     ].filter((g) => g.items.length)
-  }, [q])
+  }, [agents, q])
   const flat = groups.flatMap((g) => g.items)
 
   useEffect(() => setActive(0), [q])

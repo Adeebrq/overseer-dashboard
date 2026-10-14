@@ -43,7 +43,7 @@ export default function App() {
       }`}
     >
       <Sidebar
-        activeSlug={page.slug}
+        activeSlug={page.section ?? page.slug}
         onSignOut={() => setSignedOut(true)}
         onCollapse={() => {
           setRailAnimating(true)
@@ -53,7 +53,7 @@ export default function App() {
       />
       <div className="scrim" onClick={() => setDrawerOpen(false)} aria-hidden="true" />
       <div className="workspace">
-        <Topbar title={page.label} onMenu={() => setDrawerOpen(true)} />
+        <Topbar title={page.label} onMenu={() => setDrawerOpen(true)} onSignOut={() => setSignedOut(true)} />
         <main className="content">
           {page.slug === 'overview' ? (
             <>

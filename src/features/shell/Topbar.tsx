@@ -1,9 +1,10 @@
+import AccountMenu from './AccountMenu'
 import NotificationsMenu from './NotificationsMenu'
 import TopSearch from './TopSearch'
 
-type Props = { title: string; onMenu: () => void }
+type Props = { title: string; onMenu: () => void; onSignOut: () => void }
 
-export default function Topbar({ title, onMenu }: Props) {
+export default function Topbar({ title, onMenu, onSignOut }: Props) {
   return (
     <header className="topbar">
       <button className="icon-btn topbar__menu" onClick={onMenu} aria-label="Open navigation">
@@ -18,7 +19,7 @@ export default function Topbar({ title, onMenu }: Props) {
         <TopSearch />
         <NotificationsMenu />
         <span className="topbar__divider" aria-hidden="true" />
-        <img className="topbar__avatar" src="/avatars/user.jpg" alt="Your profile" />
+        <AccountMenu trigger="avatar" onSignOut={onSignOut} />
       </div>
     </header>
   )

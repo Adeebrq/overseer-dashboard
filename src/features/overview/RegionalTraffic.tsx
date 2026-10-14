@@ -5,6 +5,7 @@ import { DOT_COLORS, dotDelay, INTRO_MS, useIntro } from '../../lib/intro'
 import { WORLD_DOT, worldDots } from '../../data/worldDots'
 import DotCanvas from '../../components/DotCanvas'
 import Trend from '../../components/Trend'
+import RegionsMenu from './RegionsMenu'
 
 // The world map's coordinate space, straight from the design export.
 const VB = { x: 771, y: 311, w: 461, h: 202 }
@@ -54,7 +55,7 @@ export default function RegionalTraffic() {
         <h2 id="traffic-title" className="label-mono">
           Regional Traffic
         </h2>
-        <button className="btn btn--compact">View all</button>
+        <RegionsMenu regions={regions} pinnedId={pinnedId} onPick={setPinnedId} />
       </header>
       <div className="traffic__summary">
         <p className="chart-card__value pixel-num">67,546</p>
