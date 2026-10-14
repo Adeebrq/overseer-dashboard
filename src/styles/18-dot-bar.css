@@ -1,0 +1,9 @@
+/* Dot bars (drawn on a canvas that fills the box) */
+.dotbar {
+  display: block;
+}
+.dotbar canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}

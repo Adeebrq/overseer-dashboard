@@ -1,0 +1,113 @@
+/* Account card (a button) + menu */
+button.user-card {
+  border: 0;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+button.user-card:hover .user-card__more,
+.account.is-open .user-card__more {
+  background: rgba(255, 255, 255, 0.08);
+}
+.account {
+  position: relative;
+}
+.popover.account__menu {
+  top: auto;
+  bottom: calc(100% + 6px);
+  left: 11px;
+  right: auto;
+  width: 189px;
+  padding: 4px;
+  list-style: none;
+  outline: none;
+  white-space: nowrap;
+  transform-origin: bottom left;
+}
+.account__head {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 6px 6px 9px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid var(--card-line);
+}
+.account__head .user-card__initials {
+  width: 24px;
+  height: 22px;
+  font-size: 10.6px;
+}
+.account__who {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.account__name {
+  font-size: 10.6px;
+  color: var(--text);
+}
+.account__role {
+  font-size: 8.6px;
+  color: var(--text-muted);
+}
+.account__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 27px;
+  padding: 0 8px 0.86px 9px;
+  border-radius: 5px;
+  font-size: 10.6px;
+  letter-spacing: -0.04em;
+  color: var(--text-muted);
+  cursor: pointer;
+  user-select: none;
+}
+.account__item.is-active {
+  background: #2f3631;
+  color: var(--text-bright);
+}
+.account__item.has-rule {
+  position: relative;
+  margin-top: 9px;
+}
+.account__item.has-rule::before {
+  content: '';
+  position: absolute;
+  left: -4px;
+  right: -4px;
+  top: -5px;
+  height: 1px;
+  background: var(--card-line);
+}
+.account__item.is-danger {
+  color: var(--red);
+}
+.account__item.is-danger.is-active {
+  background: rgba(240, 138, 138, 0.1);
+  color: #ffb1b1;
+}
+.account__kbd,
+.shortcuts kbd {
+  display: inline-grid;
+  place-items: center;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: 4px;
+  border: 0.5px solid #3a403c;
+  background: #222824;
+  font-family: var(--sans);
+  font-size: 8.6px;
+  color: var(--text-muted);
+}
+/* Collapsed rail: the menu pops out beside the rail instead of being clipped by it. */
+@media (min-width: 1025px) {
+  .is-collapsed .sidebar {
+    overflow: visible;
+  }
+  .is-collapsed .account__menu {
+    left: 7px;
+  }
+}

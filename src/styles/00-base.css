@@ -1,0 +1,134 @@
+/* All lengths are design pixels from the 1280px Figma frame; Vite converts them to rem. */
+
+@font-face {
+  font-family: 'Geist';
+  src: url('../fonts/Geist-Variable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Geist Mono';
+  src: url('../fonts/GeistMono-Variable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Departure Mono';
+  src: url('../fonts/DepartureMono-Regular.woff2') format('woff2');
+  font-display: swap;
+}
+
+:root {
+  --frame: #1f2421;
+  --panel: #252a27;
+  --card: #232825;
+  --card-line: rgba(150, 150, 150, 0.2);
+  --hairline: #575757;
+  --field: #1a1f1c;
+
+  --text: #ffffff;
+  --text-bright: #f5f5f6;
+  --text-muted: #a6a6ab;
+  --text-dim: #7c7c82;
+  --text-faint: #727378;
+  --icon: #8a8a90;
+
+  --green: #00a449;
+  --green-bright: #4ade80;
+  --green-trend: #00b952;
+  --green-deep: #1f5537;
+  --green-edge: #006624;
+  --red: #f08a8a;
+  --blue: #7fa8ff;
+  --amber: #e0b36a;
+
+  --sans: 'Geist', ui-sans-serif, system-ui, sans-serif;
+  --mono: 'Geist Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  --pixel: 'Departure Mono', var(--mono);
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Read by canvases / SVG and swapped by the light theme */
+  --dot-track: rgba(0, 0, 0, 0.5);
+  --chart-line: var(--green-bright);
+  --chart-line-w: 1.5;
+
+  color-scheme: dark;
+}
+
+/* Desktop: the whole dashboard fits the window like the 1280×832 Figma frame. The root size
+   scales by whichever is tighter — width (1280 design px = 80rem) or height (the layout is
+   820 design px tall = 51.25rem) — so there's no page scroll. Below 12px it would get too
+   small to read, so very short windows scroll instead. Tablet and phone use a normal
+   scrolling layout at 16px. */
+html {
+  font-size: 16px;
+}
+@media (min-width: 1025px) {
+  html {
+    font-size: clamp(12px, min(100vw / 80, 100vh / 51.25), 32px);
+    font-size: clamp(12px, min(100vw / 80, 100dvh / 51.25), 32px);
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--frame);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 12px;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: geometricPrecision;
+}
+
+h1,
+h2,
+p,
+ul {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+}
+ul {
+  list-style: none;
+}
+button,
+input {
+  font: inherit;
+  color: inherit;
+}
+button {
+  cursor: pointer;
+  background: none;
+  border: 0;
+  padding: 0;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+img,
+svg {
+  display: block;
+}
+:focus-visible {
+  outline: 1.5px solid var(--green-bright);
+  outline-offset: 2px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}

@@ -1,0 +1,27 @@
+/*
+ * Styles are authored in design pixels from the 1280px Figma frame; vite.config.ts converts
+ * them to rem so the whole UI scales with the root font-size. Files are numbered because the
+ * cascade order matters — light-theme overrides (last) must come after everything else.
+ */
+@import './00-base.css';
+@import './01-typography.css';
+@import './02-shell.css';
+@import './03-topbar.css';
+@import './04-controls.css';
+@import './05-coming-soon.css';
+@import './06-kpi.css';
+@import './07-dropdown.css';
+@import './08-charts.css';
+@import './09-agent-health.css';
+@import './10-top-search.css';
+@import './11-export-menu.css';
+@import './12-toast.css';
+@import './13-row-flash.css';
+@import './14-account-menu.css';
+@import './15-dialogs.css';
+@import './16-signed-out.css';
+@import './17-filter.css';
+@import './18-dot-bar.css';
+@import './19-dev-overlay.css';
+@import './20-responsive.css';
+@import './21-theme-light.css';

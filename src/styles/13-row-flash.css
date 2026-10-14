@@ -1,0 +1,15 @@
+/* Row picked from the top-bar search */
+.health__table tbody tr.is-flash {
+  animation: row-flash 1.4s ease-out;
+}
+@keyframes row-flash {
+  0%,
+  30% {
+    background: rgba(74, 222, 128, 0.12);
+    box-shadow: inset 2px 0 0 var(--green-bright);
+  }
+  100% {
+    background: transparent;
+    box-shadow: inset 2px 0 0 transparent;
+  }
+}

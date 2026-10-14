@@ -1,0 +1,210 @@
+/* Filter popover */
+.filter {
+  position: relative;
+}
+.filter.is-open .filter__button,
+.filter__button.has-filters {
+  border-color: var(--green);
+}
+.filter__count {
+  display: inline-grid;
+  place-items: center;
+  min-width: 14px;
+  height: 14px;
+  margin: 0.86px -3px 0 -1.5px;
+  padding: 0 3.5px;
+  border-radius: 7px;
+  background: var(--green);
+  color: #03160a;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0;
+}
+.popover {
+  position: absolute;
+  z-index: 30;
+  top: calc(100% + 6px);
+  right: 0;
+  border-radius: 8px;
+  border: 0.5px solid rgba(0, 102, 36, 0.9);
+  background: linear-gradient(#262c28, #1e2a22);
+  box-shadow:
+    0 10px 24px rgba(0, 0, 0, 0.45),
+    0 2px 6px rgba(0, 0, 0, 0.3),
+    inset 0 0.3px 0.25px rgba(255, 255, 255, 0.5);
+  transform-origin: top right;
+  animation: menu-in 0.16s var(--ease-out) both;
+}
+.popover.is-up {
+  top: auto;
+  bottom: calc(100% + 6px);
+  transform-origin: bottom right;
+}
+.filter__panel {
+  width: 204px;
+  padding: 10px 8px 8px;
+  white-space: nowrap;
+}
+.filter__group {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+.filter__group + .filter__group {
+  margin-top: 8px;
+  padding-top: 10px;
+  border-top: 1px solid var(--card-line);
+}
+.filter__legend {
+  float: left;
+  width: 100%;
+  margin-bottom: 6px;
+  padding: 0 6px;
+  font-size: 8.1px;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+.filter__option {
+  clear: both;
+  display: grid;
+  grid-template-columns: 12px 8px 1fr auto;
+  align-items: center;
+  gap: 8px;
+  height: 25px;
+  padding: 0 7px 0 6px;
+  border-radius: 5px;
+  font-size: 10.6px;
+  letter-spacing: -0.04em;
+  color: var(--text-muted);
+  cursor: pointer;
+  user-select: none;
+}
+.filter__option:hover,
+.filter__option:has(:focus-visible) {
+  background: #2f3631;
+  color: var(--text-bright);
+}
+.filter__option:has(:checked) {
+  color: var(--text);
+}
+.filter__label {
+  padding-bottom: 0.86px;
+}
+.filter__n {
+  font-family: var(--mono);
+  font-size: 9.8px;
+  color: var(--text-dim);
+}
+
+/* Square-in-square check, echoing the map markers */
+.pixel-check {
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  margin: 0;
+  border: 1px solid rgba(166, 166, 171, 0.45);
+  border-radius: 2px;
+  background: transparent;
+  cursor: pointer;
+  transition:
+    border-color 0.12s ease,
+    background-color 0.12s ease,
+    box-shadow 0.12s ease;
+}
+.pixel-check:checked {
+  border-color: rgba(74, 222, 128, 0.85);
+  background: var(--green-bright);
+  box-shadow: inset 0 0 0 2px #262c28;
+}
+.pixel-check:focus-visible {
+  outline: 1.5px solid var(--green-bright);
+  outline-offset: 2px;
+}
+
+.filter__swatch {
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  border: 0.5px solid;
+}
+.filter__swatch--healthy {
+  border-color: var(--green);
+  background: #1c422f;
+}
+.filter__swatch--paused {
+  border-color: var(--red);
+  background: #2d1212;
+}
+.filter__swatch--deploying {
+  border-color: var(--blue);
+  background: #1d2943;
+}
+.filter__swatch--degraded {
+  border-color: var(--amber);
+  background: #2e220f;
+}
+
+.segmented {
+  clear: both;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  margin: 0 2px;
+  padding: 2px;
+  border-radius: 6px;
+  background: var(--field);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.25);
+}
+.segmented__item {
+  height: 22px;
+  padding-bottom: 0.86px;
+  border-radius: 4px;
+  font-size: 10px;
+  letter-spacing: -0.04em;
+  color: var(--text-muted);
+  transition:
+    color 0.12s ease,
+    background-color 0.12s ease;
+}
+.segmented__item:hover {
+  color: var(--text-bright);
+}
+.segmented__item[aria-checked='true'] {
+  background: linear-gradient(#2a302c, #1e2a22);
+  color: var(--text);
+  box-shadow:
+    0 0 0 0.5px var(--green-edge),
+    inset 0 0.3px 0.25px rgba(255, 255, 255, 0.6);
+}
+
+.filter__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 12px;
+  padding: 0 2px 0 6px;
+}
+.filter__clear,
+.link-btn {
+  padding-bottom: 0.86px;
+  font-size: 10.6px;
+  letter-spacing: -0.04em;
+  color: var(--green-bright);
+}
+.filter__clear:hover:not(:disabled),
+.link-btn:hover {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.filter__clear:disabled {
+  color: var(--text-dim);
+  cursor: default;
+}
+.filter__done {
+  height: 24px;
+}
+.health__empty {
+  font-size: 11px;
+}

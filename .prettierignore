@@ -1,0 +1,5 @@
+dist
+node_modules
+design
+package-lock.json
+src/data/worldDots.ts

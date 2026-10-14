@@ -1,0 +1,52 @@
+/* Export menu */
+.export__menu {
+  width: 200px;
+  padding: 4px;
+  list-style: none;
+  outline: none;
+  white-space: nowrap;
+}
+.export__caption {
+  padding: 6px 8px 5px;
+  font-size: 8.1px;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+.export__item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 3px;
+  height: 36px;
+  padding: 0 9px;
+  border-radius: 5px;
+  cursor: pointer;
+  user-select: none;
+}
+.export__item.is-active {
+  background: #2f3631;
+}
+.export__title {
+  font-size: 10.6px;
+  letter-spacing: -0.04em;
+  color: var(--text);
+}
+.export__hint {
+  font-size: 9px;
+  color: var(--text-dim);
+}
+.export__item.is-active .export__hint {
+  color: var(--text-muted);
+}
+.export__menu:focus-visible .export__item.is-active {
+  box-shadow: inset 0 0 0 1px rgba(74, 222, 128, 0.35);
+}
+.export__button {
+  min-width: 71px;
+}
+.export__button:disabled {
+  opacity: 0.45;
+  cursor: default;
+  filter: none;
+}

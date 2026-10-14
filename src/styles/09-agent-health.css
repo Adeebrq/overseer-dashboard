@@ -1,0 +1,225 @@
+/* ---------- Agent health ---------- */
+
+.health {
+  min-height: 243px; /* design height, so filtering rows doesn't make the layout jump */
+  padding: 11px 17px 4px 19px;
+}
+.health__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 26px;
+}
+.health__title {
+  padding: 2.3px 0 0 0.2px;
+}
+.health__tools {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.health__search {
+  width: 137px;
+  height: 26px;
+}
+
+.health__scroll {
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #3a403c transparent;
+  margin-right: 2.4px;
+}
+.health__table {
+  width: 100%;
+  min-width: 880px;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-family: var(--mono);
+  font-size: 12.3px;
+  letter-spacing: -0.015em;
+  color: var(--text);
+  white-space: nowrap;
+}
+.health__table th:nth-child(1) {
+  width: 15.26%;
+}
+.health__table th:nth-child(2) {
+  width: 12.02%;
+}
+.health__table th:nth-child(3) {
+  width: 14.02%;
+}
+.health__table th:nth-child(4) {
+  width: 25.25%;
+}
+.health__table th:nth-child(5) {
+  width: 14.26%;
+}
+.health__table th:nth-child(6) {
+  width: 14.15%;
+}
+.health__table th:nth-child(7) {
+  width: 5.04%;
+}
+
+.health__table th {
+  height: 28px;
+  padding: 9.8px 0 0;
+  vertical-align: top;
+  text-align: left;
+  font-weight: 400;
+  font-size: 12.4px;
+  letter-spacing: -0.03em;
+  border-bottom: 1px solid var(--card-line);
+}
+.health__table th:first-child {
+  padding-left: 2.5px;
+}
+.health__table th:last-child {
+  text-align: center;
+  letter-spacing: -0.01em;
+}
+.th-sort {
+  display: inline-flex;
+  align-items: center;
+  gap: 10.5px;
+  letter-spacing: inherit;
+}
+.th-sort__chevron {
+  width: 7.2px;
+  height: 4.2px;
+  margin-top: -2px;
+  transition: transform 0.15s ease;
+}
+
+.health__table tbody tr:first-child td {
+  height: 36px;
+  padding-top: 3.4px;
+}
+/* Mono text sits optically high in the row; graphics stay on the row centre. */
+.agent__avatar,
+.success .dotbar,
+.pill {
+  translate: 0 -0.7px;
+}
+.health__table td {
+  height: 34px;
+  padding: 1.4px 0 0;
+  vertical-align: middle;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.health__table tbody tr {
+  transition: background-color 0.15s ease;
+}
+.health__table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.agent {
+  display: flex;
+  align-items: center;
+  gap: 8.7px;
+  padding-left: 2px;
+}
+.agent__avatar {
+  flex: none;
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #000;
+  box-shadow:
+    0 2px 2px rgba(0, 0, 0, 0.25),
+    inset 0 -2px 4px rgba(74, 222, 128, 0.3),
+    inset 0 2.5px 2px rgba(74, 222, 128, 0.2);
+}
+.agent__avatar::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  background: linear-gradient(80deg, #00682e, #1f5537) border-box;
+  -webkit-mask:
+    linear-gradient(#000 0 0) padding-box exclude,
+    linear-gradient(#000 0 0);
+  mask:
+    linear-gradient(#000 0 0) padding-box exclude,
+    linear-gradient(#000 0 0);
+}
+.agent__avatar img {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.pill {
+  display: inline-grid;
+  place-items: center;
+  width: 97.5px;
+  height: 19.5px;
+  border-radius: 9.75px;
+  border: 0.5px solid;
+  padding-top: 1.6px; /* centres the capital height */
+  font-family: var(--mono);
+  font-size: 10.3px;
+  letter-spacing: -0.02em;
+}
+.pill--healthy {
+  color: var(--green-bright);
+  border-color: var(--green);
+  background: linear-gradient(#232825, #1c422f);
+}
+.pill--paused {
+  color: var(--red);
+  border-color: var(--red);
+  background: linear-gradient(#232825, #2d1212);
+}
+.pill--deploying {
+  color: var(--blue);
+  border-color: var(--blue);
+  background: linear-gradient(#232825, #1d2943);
+}
+.pill--degraded {
+  color: var(--amber);
+  border-color: var(--amber);
+  background: linear-gradient(#232825, #2e220f);
+}
+
+.success {
+  display: flex;
+  align-items: center;
+  gap: 4.4px;
+}
+.success .dotbar {
+  flex: none;
+  width: 172.6px;
+  height: 22.2px;
+}
+.is-paused .success .dotbar {
+  opacity: 0.5;
+}
+.success__pct {
+  font-size: 9.8px;
+  letter-spacing: 0;
+}
+.health__actions .icon-btn {
+  margin: 0 auto;
+  translate: 0 -3px;
+  padding: 4px;
+  color: #bcbbba;
+}
+.health__actions svg {
+  width: 16.8px;
+  height: 3.8px;
+}
+.health__empty {
+  text-align: center;
+  color: var(--text-muted);
+}

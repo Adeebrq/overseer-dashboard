@@ -1,0 +1,38 @@
+/* ---------- Type ---------- */
+
+.label-mono {
+  font-family: var(--mono);
+  font-size: 12.6px;
+  font-weight: 400;
+  letter-spacing: -0.06em;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.pixel-num {
+  font-family: var(--pixel);
+  font-size: 26px;
+  line-height: 1;
+  letter-spacing: -2.08px;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.trend {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  color: var(--green-trend);
+  font-size: 12.6px;
+  white-space: nowrap;
+}
+.trend__arrow {
+  width: 7.76px;
+  height: 8.78px;
+  align-self: center;
+  margin-top: -1px;
+}
+.trend--mono {
+  font-family: var(--mono);
+  letter-spacing: -0.06em;
+}

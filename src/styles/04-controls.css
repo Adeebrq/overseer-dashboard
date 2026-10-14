@@ -1,0 +1,94 @@
+/* ---------- Cards & buttons ---------- */
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--card-line);
+  border-radius: 12px;
+  min-width: 0;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7.3px;
+  height: 26px;
+  padding-inline: 12.3px 12px;
+  border-radius: 6px;
+  border: 0.5px solid var(--green-edge);
+  background: linear-gradient(#2a302c, #1e2a22);
+  box-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.25),
+    inset 0 0.3px 0.25px rgba(255, 255, 255, 0.6),
+    inset 0 -4px 8px rgba(0, 164, 73, 0.05);
+  /* centres the capital height (Geist sits slightly low in its line box) */
+  padding-bottom: 0.86px;
+  font-size: 10.6px;
+  letter-spacing: -0.06em;
+  color: var(--text);
+  white-space: nowrap;
+  transition: filter 0.15s ease;
+}
+.btn:hover {
+  filter: brightness(1.15);
+}
+.btn__chevron {
+  width: 8.4px;
+  height: 5.6px;
+}
+.btn--compact {
+  padding-inline: 12px;
+}
+.btn--tool {
+  gap: 8.8px;
+  padding-inline: 12px;
+  letter-spacing: -0.045em;
+}
+.btn__icon {
+  color: #d9d8d8;
+}
+.filter__button {
+  gap: 6.5px;
+}
+
+.glyph-tile {
+  flex: none;
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  place-items: center;
+  width: 25px;
+  height: 25px;
+  color: var(--text);
+}
+/* Tile artwork (with its own bevel + shadow). The 340px source has the 260px tile at (40, 20),
+   so it's scaled to put that tile exactly on this 25px box. */
+.glyph-tile::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  left: -3.846px;
+  top: -1.923px;
+  width: 32.692px;
+  height: 32.692px;
+  background: url('../assets/icon-tile.png') center / 100% 100% no-repeat;
+  pointer-events: none;
+}
+
+/* Larger tile (same artwork, same proportions) */
+.glyph-tile--lg {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+}
+.glyph-tile--lg::before {
+  left: -6.77px;
+  top: -3.385px;
+  width: 57.54px;
+  height: 57.54px;
+}
+.glyph-tile--lg svg {
+  width: 20px;
+  height: 20px;
+  color: var(--text);
+}

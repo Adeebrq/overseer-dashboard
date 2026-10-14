@@ -1,0 +1,327 @@
+/* ---------- Charts ---------- */
+
+.chart-row {
+  display: grid;
+  grid-template-columns: minmax(0, 507fr) minmax(0, 496fr);
+  gap: 11px;
+}
+
+.chart-card {
+  display: flex;
+  flex-direction: column;
+  padding: 13px 13px 16px 18px;
+}
+.chart-card__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.chart-card__value {
+  margin: 3.8px 0 0 -1px;
+}
+.traffic__summary .chart-card__value {
+  margin-left: -2px;
+}
+
+.inference-plot {
+  position: relative;
+  height: 215px;
+  margin: 10.2px 0 0 -1px;
+}
+.inference-plot svg {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.inference-plot canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.grid-line {
+  stroke: var(--green);
+  stroke-opacity: 0.1;
+}
+.axis-label {
+  font-family: var(--sans);
+  fill: #fffffe;
+}
+.inference-plot__line {
+  fill: none;
+  stroke: var(--chart-line);
+  stroke-width: var(--chart-line-w);
+  stroke-linejoin: round;
+}
+
+/* Load intro */
+.draw-in {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation-name: draw-line;
+  animation-timing-function: cubic-bezier(0.45, 0, 0.2, 1);
+  animation-fill-mode: forwards;
+}
+@keyframes draw-line {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+/* Regional traffic */
+.chart-card:has(.world) {
+  padding: 13px 11px 23px 18px;
+}
+.traffic__summary {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  padding-right: 1px;
+}
+.traffic__delta {
+  display: flex;
+  align-items: baseline;
+  gap: 4.5px;
+  margin-bottom: -2.1px;
+  font-family: var(--mono);
+  font-size: 12.6px;
+  letter-spacing: -0.06em;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+.world {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  margin: 16.2px 1px 0 3px;
+}
+.world__canvas {
+  position: relative;
+  width: 100%;
+  max-width: 461px; /* never taller than the design's 202px, so the page fits the window */
+  margin: 0 auto;
+  aspect-ratio: 461 / 202;
+}
+.world__dots {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  fill: var(--green);
+}
+/* Dots around the active region glow brighter. */
+.world__lit {
+  fill: var(--green-bright);
+  opacity: 0.55;
+  animation: fade-in 0.25s ease both;
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+/* L-shaped connector from the active marker to the tooltip. */
+.world__link {
+  position: absolute;
+  translate: -0.5px 0.5px;
+  pointer-events: none;
+  transition:
+    left 0.2s ease,
+    top 0.2s ease;
+}
+.world__link.is-flipped {
+  translate: 0.5px 0.5px;
+}
+.world__link-v,
+.world__link-h {
+  position: absolute;
+  background: rgba(74, 222, 128, 0.5);
+}
+.world__link-v {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 1px;
+  transform-origin: top;
+}
+.world__link.is-flipped .world__link-v {
+  left: auto;
+  right: 0;
+}
+.world__link-h {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  transform-origin: left;
+}
+.world__link.is-flipped .world__link-h {
+  transform-origin: right;
+}
+
+.world__marker {
+  position: absolute;
+  width: 11.72px;
+  height: 11.72px;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(74, 222, 128, 0.5);
+  transition: border-color 0.15s ease;
+}
+.world__marker::before {
+  /* larger hit area */
+  content: '';
+  position: absolute;
+  inset: -7px;
+}
+.world__marker::after {
+  content: '';
+  position: absolute;
+  inset: 2.42px;
+  background: var(--green-bright);
+}
+.world__marker:hover,
+.world__marker.is-active {
+  border-color: rgba(74, 222, 128, 0.95);
+}
+/* Pinned pulse: an expanding ring animated with transform + opacity only, so it runs on the
+   GPU and never repaints the map underneath. */
+.world__marker-ring {
+  position: absolute;
+  inset: -1px;
+  border: 1.5px solid rgba(74, 222, 128, 0.6);
+  opacity: 0;
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+.world__marker.is-pinned .world__marker-ring {
+  animation: marker-pulse 2.2s ease-out infinite;
+}
+@keyframes marker-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  70%,
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+/* Load intro: dots sweep in (drawn on canvas), markers blink on as the sweep reaches them,
+   then the connector draws down and across and the tooltip settles. */
+.is-intro .world__marker {
+  animation: blink-on 0.2s steps(1, end) both;
+}
+@keyframes blink-on {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+.is-intro .world__link-v {
+  animation: grow-y 0.17s ease-out both;
+}
+.is-intro .world__link-h {
+  animation: grow-x 0.2s ease-out both;
+}
+@keyframes grow-y {
+  from {
+    transform: scaleY(0);
+  }
+}
+@keyframes grow-x {
+  from {
+    transform: scaleX(0);
+  }
+}
+.is-intro .region-tip {
+  animation: tip-in 0.25s ease-out both;
+}
+@keyframes tip-in {
+  from {
+    opacity: 0;
+    translate: 0 3px;
+  }
+}
+
+.region-tip {
+  position: absolute;
+  width: 105px;
+  height: 49.5px;
+  padding: 0 7.5px 0 7px;
+  border-radius: 6px;
+  background: linear-gradient(#232825, #24322b);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+  font-size: 8.3px;
+  color: var(--text-muted);
+  white-space: nowrap;
+  pointer-events: none;
+  transition:
+    left 0.2s ease,
+    top 0.2s ease;
+}
+.region-tip::before {
+  -webkit-mask-image: radial-gradient(75% 140% at 100% 20%, #000 20%, transparent 80%);
+  mask-image: radial-gradient(75% 140% at 100% 20%, #000 20%, transparent 80%);
+}
+.region-tip::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 0.5px;
+  background: linear-gradient(68deg, rgba(31, 85, 55, 0) 50%, rgba(31, 85, 55, 0.8));
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box exclude,
+    linear-gradient(#000 0 0);
+  mask:
+    linear-gradient(#000 0 0) content-box exclude,
+    linear-gradient(#000 0 0);
+}
+.region-tip__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 23px;
+  padding-top: 0.5px;
+  padding-right: 4px;
+  color: var(--text-bright);
+}
+.region-tip__dot {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--green-bright);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+.region-tip__dot::after {
+  content: '';
+  position: absolute;
+  inset: 2.5px;
+  border-radius: 50%;
+  background: #004517;
+}
+.region-tip.is-preview .region-tip__dot {
+  background: transparent;
+  box-shadow: inset 0 0 0 1.5px var(--green-bright);
+}
+.region-tip.is-preview .region-tip__dot::after {
+  display: none;
+}
+.region-tip__rule {
+  height: 0.5px;
+  margin: 1.5px -1px 0 -0.5px;
+  background: radial-gradient(79px 6px at 50% 50%, var(--green) 0%, var(--green-deep) 29%, #27272b 64%);
+}
+.region-tip__meta {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 9.5px;
+}

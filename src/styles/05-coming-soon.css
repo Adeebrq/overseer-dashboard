@@ -1,0 +1,36 @@
+/* ---------- Coming soon ---------- */
+
+.coming-soon {
+  flex: 1;
+  display: grid;
+  place-items: center;
+  padding: 40px 20px;
+  animation: fade-in 0.3s ease both;
+}
+.coming-soon__body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 360px;
+  text-align: center;
+}
+.coming-soon__eyebrow {
+  margin-top: 18px;
+}
+.coming-soon__title {
+  margin-top: 10px;
+}
+.coming-soon__text {
+  margin-top: 12px;
+  font-size: 12.6px;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+.coming-soon .dotbar {
+  width: 172.6px;
+  height: 10.42px;
+  margin-top: 22px;
+}
+.coming-soon__back {
+  margin-top: 24px;
+}

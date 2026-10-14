@@ -1,0 +1,405 @@
+/* ---------- Shell ---------- */
+
+.shell {
+  --sidebar-w: 211px;
+  display: grid;
+  grid-template-columns: var(--sidebar-w) minmax(0, 1fr);
+  min-height: 100vh;
+}
+.shell.is-collapsed {
+  --sidebar-w: 56px;
+}
+
+.workspace {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.content {
+  background: var(--panel);
+  flex: 1;
+  padding: 19px 20px 19px;
+  display: flex;
+  flex-direction: column;
+  gap: 19px;
+  min-width: 0;
+}
+
+.scrim {
+  display: none;
+}
+
+/* ---------- Sidebar ---------- */
+
+.sidebar {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  border-right: 0.4px solid var(--hairline);
+  background: var(--frame);
+  overflow: hidden auto;
+  scrollbar-width: none;
+  z-index: 30;
+}
+
+.sidebar__brand {
+  flex: none;
+  height: 51px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 11px 10.8px 0 11px;
+  border-bottom: 0.4px solid var(--hairline);
+}
+.sidebar__logo {
+  color: #727279;
+  width: 20px;
+  height: 18.5px;
+}
+.sidebar__collapse {
+  color: #727279;
+}
+.sidebar__collapse svg {
+  width: 8.4px;
+  height: 7.4px;
+  transition: transform 0.2s ease;
+}
+.is-collapsed .sidebar__collapse svg {
+  transform: scaleX(-1);
+}
+
+.sidebar__nav {
+  padding-top: 19.6px;
+}
+.nav-group {
+  padding: 0 11px 10px;
+}
+.nav-group + .nav-group {
+  border-top: 0.4px dashed var(--hairline);
+  padding-top: 12.1px;
+}
+.nav-group:nth-child(3) {
+  padding-top: 11.8px;
+}
+.nav-group:last-child {
+  padding-bottom: 0;
+}
+.nav-group__title {
+  padding-left: 0.7px;
+  margin-left: -11px;
+  padding-inline-start: 11.7px;
+  margin-bottom: 7.2px;
+  font-size: 8.1px;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  white-space: nowrap;
+}
+.nav-group ul {
+  display: flex;
+  flex-direction: column;
+  gap: 4.2px;
+}
+
+.nav-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6.7px;
+  height: 25px;
+  padding-left: 6px;
+  border-radius: 6px;
+  color: var(--text-muted);
+  font-size: 12px;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+  overflow: hidden;
+  transition:
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+.nav-item:hover {
+  background: rgba(42, 48, 44, 0.6);
+  color: var(--text-bright);
+}
+.nav-item__icon {
+  flex: none;
+  width: 12px;
+  height: 12px;
+  color: var(--icon);
+}
+.nav-item.is-active {
+  background: #2a302c;
+  color: var(--text-bright);
+  letter-spacing: 0;
+  font-size: 11.6px;
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.2),
+    inset 0 -0.5px 1px rgba(0, 116, 51, 0.25),
+    inset 0 0.25px 0.5px rgba(255, 255, 255, 0.5);
+}
+.nav-item__glow {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.nav-item__bar {
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.25));
+}
+/* Load only: sparkles drift into place with a brief twinkle, then rest. */
+.nav-spark {
+  transform-box: fill-box;
+  animation: spark-settle 1.1s var(--ease-out) both;
+}
+@keyframes spark-settle {
+  0% {
+    opacity: 0;
+    transform: translate(var(--dx), var(--dy));
+  }
+  35% {
+    opacity: 1;
+  }
+  55% {
+    opacity: 0.45;
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.sidebar__footer {
+  margin-top: auto;
+  padding-top: 24px;
+}
+.sidebar__divider {
+  height: 0;
+  margin-top: 13.5px;
+  border-top: 0.4px dashed var(--hairline);
+}
+.sidebar__divider + .account > .user-card {
+  margin-top: 11.6px;
+}
+
+.hatch-card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+/* Fine diagonal hatching that only shows where a soft green bloom sits behind it. */
+.hatch-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: repeating-linear-gradient(-45deg, rgba(31, 85, 55, 0.75) 0 0.5px, transparent 0.5px 3.99px);
+  -webkit-mask-image: radial-gradient(55% 100% at 100% 0%, #000 10%, transparent 70%);
+  mask-image: radial-gradient(55% 100% at 100% 0%, #000 10%, transparent 70%);
+}
+.hatch-card--left::before {
+  -webkit-mask-image: radial-gradient(55% 120% at 0% 55%, #000 10%, transparent 80%);
+  mask-image: radial-gradient(55% 120% at 0% 55%, #000 10%, transparent 80%);
+}
+
+.token-card,
+.user-card {
+  margin: 0 11px;
+  border-radius: 6px;
+  background: linear-gradient(#232825, #24322b);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+}
+.token-card::after,
+.user-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 0.5px;
+  background: linear-gradient(62deg, rgba(31, 85, 55, 0) 50%, rgba(31, 85, 55, 0.8));
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box exclude,
+    linear-gradient(#000 0 0);
+  mask:
+    linear-gradient(#000 0 0) content-box exclude,
+    linear-gradient(#000 0 0);
+  pointer-events: none;
+}
+
+.token-card {
+  height: 70.5px;
+  padding: 10px 8.5px 0;
+}
+.token-card__title {
+  padding-left: 0.4px;
+  font-size: 8.1px;
+  letter-spacing: 0.018em;
+  text-transform: uppercase;
+  color: var(--text-bright);
+}
+.token-card__rule {
+  height: 0.5px;
+  margin: 7.8px 0 9.9px;
+  background: radial-gradient(148px 6px at 50% 50%, var(--green) 0%, var(--green-deep) 29%, #27272b 64%);
+}
+.token-card .dotbar {
+  width: calc(100% - 0.4px);
+  height: 10.42px;
+  margin-left: 0.7px;
+}
+.token-card__meta {
+  display: flex;
+  justify-content: space-between;
+  margin: 6.3px -0.6px 0 0;
+  padding: 0 0 0 0.5px;
+  font-size: 8.1px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+.token-card__meta span + span {
+  font-size: 8.7px;
+  letter-spacing: -0.02em;
+}
+
+.user-card {
+  display: flex;
+  align-items: center;
+  height: 41px;
+  margin-top: 25.5px;
+  margin-bottom: 25px;
+  padding: 0 13px 0 8.5px;
+}
+.user-card__initials {
+  flex: none;
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 24px;
+  border-radius: 6px;
+  background: #27272b;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
+  padding-top: 1.2px;
+  font-size: 12.2px;
+  letter-spacing: -0.01em;
+}
+.user-card__initials::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 0.5px;
+  background: linear-gradient(to left, rgba(31, 85, 55, 0), rgba(31, 85, 55, 0.9));
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box exclude,
+    linear-gradient(#000 0 0);
+  mask:
+    linear-gradient(#000 0 0) content-box exclude,
+    linear-gradient(#000 0 0);
+}
+.user-card__who {
+  display: flex;
+  flex-direction: column;
+  gap: 3.9px;
+  margin-left: 12.4px;
+  min-width: 0;
+  white-space: nowrap;
+}
+.user-card__name {
+  font-size: 8.7px;
+  letter-spacing: -0.025em;
+}
+.user-card__role {
+  font-size: 8.1px;
+  color: var(--text-muted);
+}
+.user-card__more {
+  display: grid;
+  place-items: center;
+  width: 16px;
+  height: 20px;
+  margin: 0 -6px 0 auto;
+  border-radius: 4px;
+  color: var(--text);
+  transition: background-color 0.15s ease;
+}
+.user-card__more svg {
+  width: 3px;
+  height: 8.5px;
+}
+
+.icon-btn {
+  display: grid;
+  place-items: center;
+  border-radius: 4px;
+  transition: opacity 0.15s ease;
+}
+.icon-btn:hover {
+  opacity: 0.75;
+}
+
+/* Collapsed rail: everything animates — the column narrows, labels fade, icons glide to the
+   centre of the rail and the account card shrinks to its avatar tile. */
+.shell.is-rail-animating {
+  transition: grid-template-columns 0.3s var(--ease-out);
+}
+.sidebar__logo,
+.nav-item__label,
+.nav-item__glow,
+.nav-group__title,
+.token-card,
+.user-card__who,
+.user-card__more {
+  transition:
+    opacity 0.18s ease,
+    visibility 0.18s,
+    translate 0.3s var(--ease-out);
+}
+.sidebar__brand,
+.nav-item,
+.user-card {
+  transition:
+    padding 0.3s var(--ease-out),
+    margin 0.3s var(--ease-out),
+    width 0.3s var(--ease-out),
+    background-color 0.15s ease,
+    color 0.15s ease;
+}
+.token-card,
+.user-card {
+  flex: none;
+  width: 189px;
+}
+
+.is-collapsed .sidebar__brand {
+  padding-right: 23.8px;
+}
+.is-collapsed .sidebar__logo {
+  opacity: 0;
+  translate: -6px 0;
+  pointer-events: none;
+}
+.is-collapsed .nav-item {
+  padding-left: 11px;
+}
+.is-collapsed .nav-group__title,
+.is-collapsed .nav-item__label,
+.is-collapsed .nav-item__glow,
+.is-collapsed .token-card,
+.is-collapsed .user-card__who,
+.is-collapsed .user-card__more {
+  opacity: 0;
+  visibility: hidden;
+}
+.is-collapsed .nav-item__label,
+.is-collapsed .user-card__who {
+  translate: -4px 0;
+}
+.is-collapsed .user-card {
+  width: 42px;
+  margin-left: 7px;
+}

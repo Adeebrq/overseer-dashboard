@@ -1,0 +1,113 @@
+/* Toasts */
+.toaster {
+  position: fixed;
+  z-index: 60;
+  right: 20px;
+  bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  pointer-events: none;
+}
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 280px;
+  max-width: calc(100vw - 32px);
+  padding: 10px 8px 10px 10px;
+  border-radius: 10px;
+  border: 0.5px solid rgba(0, 102, 36, 0.9);
+  background: linear-gradient(#262c28, #1e2a22);
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, 0.45),
+    0 2px 6px rgba(0, 0, 0, 0.3),
+    inset 0 0.3px 0.25px rgba(255, 255, 255, 0.5);
+  pointer-events: auto;
+  animation: toast-in 0.26s var(--ease-out) both;
+}
+.toast.is-leaving {
+  animation: toast-out 0.22s ease-in both;
+}
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+}
+@keyframes toast-out {
+  to {
+    opacity: 0;
+    transform: translateX(16px);
+  }
+}
+.toast__icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  background: linear-gradient(#1f5537, #012110);
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.25),
+    inset 0 0.25px 0.5px rgba(255, 255, 255, 0.6);
+  color: var(--green-bright);
+}
+.toast__icon svg {
+  width: 12px;
+  height: 12px;
+}
+.toast--error {
+  border-color: rgba(240, 138, 138, 0.7);
+}
+.toast--error .toast__icon {
+  background: linear-gradient(#4a1d1d, #2d1212);
+  color: var(--red);
+}
+.toast__body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.toast__title {
+  font-size: 11.6px;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+.toast__desc {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 9.8px;
+  color: var(--text-muted);
+}
+.toast__close {
+  flex: none;
+  align-self: flex-start;
+  width: 18px;
+  height: 18px;
+  color: var(--text-dim);
+}
+.toast__close:hover {
+  opacity: 1;
+  color: var(--text);
+}
+.toast__close svg {
+  width: 10px;
+  height: 10px;
+}
+@media (max-width: 640px) {
+  .toaster {
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    align-items: stretch;
+  }
+  .toast {
+    width: auto;
+  }
+}
