@@ -61,6 +61,13 @@
 }
 .sidebar__collapse {
   color: #727279;
+  transition: color 0.15s ease;
+}
+/* A muted utility control: it brightens (rather than fading like other icon buttons) when you reach for it. */
+.sidebar__collapse.icon-btn:hover,
+.sidebar__collapse:focus-visible {
+  opacity: 1;
+  color: var(--text-bright);
 }
 .sidebar__collapse svg {
   width: 8.4px;
