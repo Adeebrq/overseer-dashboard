@@ -376,7 +376,15 @@
 }
 
 .is-collapsed .sidebar__brand {
-  padding-right: 23.8px;
+  position: relative;
+  justify-content: center;
+  padding-inline: 0;
+}
+/* The faded logo leaves the layout so it doesn't push the chevron off-centre in the rail. */
+.is-collapsed .sidebar__home {
+  position: absolute;
+  left: 11px;
+  pointer-events: none;
 }
 .is-collapsed .sidebar__logo {
   opacity: 0;

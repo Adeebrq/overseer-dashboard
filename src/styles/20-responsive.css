@@ -60,7 +60,12 @@
   }
   /* Drawer always shows the full sidebar, even if the rail was collapsed on desktop. */
   .is-collapsed .sidebar__brand {
-    padding-right: 10.8px;
+    justify-content: space-between;
+    padding-inline: 11px 10.8px;
+  }
+  .is-collapsed .sidebar__home {
+    position: static;
+    pointer-events: auto;
   }
   .is-collapsed .sidebar__logo,
   .is-collapsed .nav-group__title,
